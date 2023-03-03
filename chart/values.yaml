@@ -1,0 +1,15 @@
+atlantis:
+  image:
+    repository: ghcr.io/martinl373/novus-atlantis
+    tag: latest
+    pullPolicy: Always
+
+  api:
+    secret: "s3cr3t"
+  
+  repoConfig: |
+    ---
+    repos:
+      - id: /.*/
+        pre_workflow_hooks: 
+          - run: /novus/scripts/generate-projects.sh

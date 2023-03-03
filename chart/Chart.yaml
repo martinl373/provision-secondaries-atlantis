@@ -1,0 +1,10 @@
+apiVersion: v2
+name: novus-atlantis
+description: Helm chart for novus custom atlantis image
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: atlantis
+    version: "4.10.3"
+    repository: "https://runatlantis.github.io/helm-charts"

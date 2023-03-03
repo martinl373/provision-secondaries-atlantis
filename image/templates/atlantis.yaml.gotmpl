@@ -1,0 +1,19 @@
+{{- $runtimes := (ds "runtimes") -}}
+{{- $terraform := (ds "terraform") -}}
+
+version: 3
+automerge: true
+delete_source_branch_on_merge: true
+parallel_plan: true
+parallel_apply: true
+projects:
+{{- range (file.ReadDir $runtimes) -}}
+  {{- $name := strings.TrimSuffix ".yaml" . | strings.ToLower }}
+  {{- $file := path.Join $runtimes . }}
+  - name: {{ $name }}
+    workspace: {{ $name }}
+    dir: {{ $terraform }}
+    autoplan:
+      enabled: true
+      when_modified: ["{{ $file }}"]
+{{ end }}
